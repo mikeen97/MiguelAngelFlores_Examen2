@@ -112,6 +112,7 @@ public class Principal extends javax.swing.JFrame {
         cancion = new javax.swing.JDialog();
         lb_tiempoo = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        jButton19 = new javax.swing.JButton();
         jTabbedPane5 = new javax.swing.JTabbedPane();
         jPanel11 = new javax.swing.JPanel();
         jTabbedPane6 = new javax.swing.JTabbedPane();
@@ -752,6 +753,13 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel27.setText("Tiempo para finalizar la cancion");
 
+        jButton19.setText("INICIAR");
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton19ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout cancionLayout = new javax.swing.GroupLayout(cancion.getContentPane());
         cancion.getContentPane().setLayout(cancionLayout);
         cancionLayout.setHorizontalGroup(
@@ -759,11 +767,13 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(cancionLayout.createSequentialGroup()
                 .addGroup(cancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(cancionLayout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(lb_tiempoo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(cancionLayout.createSequentialGroup()
                         .addGap(124, 124, 124)
-                        .addComponent(jLabel27)))
+                        .addComponent(jLabel27))
+                    .addGroup(cancionLayout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addGroup(cancionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lb_tiempoo, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton19))))
                 .addContainerGap(127, Short.MAX_VALUE))
         );
         cancionLayout.setVerticalGroup(
@@ -773,7 +783,9 @@ public class Principal extends javax.swing.JFrame {
                 .addComponent(jLabel27)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lb_tiempoo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addGap(44, 44, 44)
+                .addComponent(jButton19)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1415,11 +1427,11 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTabbedPane2StateChanged
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+
         cancion.pack();
         cancion.setLocationRelativeTo(this);
         cancion.setVisible(true);
-        Cancion m = ((Cancion) cb_reproduccion.getSelectedItem());
-        new HiloCancion(jLabel1, m);
+
 
     }//GEN-LAST:event_jButton17ActionPerformed
 
@@ -1430,6 +1442,11 @@ public class Principal extends javax.swing.JFrame {
         }
         cb_reproduccion.setModel(model);        // TODO add your handling code here:
     }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        Cancion m = ((Cancion) cb_reproduccion.getSelectedItem());
+        new HiloCancion(lb_tiempoo, m).start();
+    }//GEN-LAST:event_jButton19ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1487,6 +1504,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
