@@ -17,7 +17,7 @@ public class Usuarios {
     private int edad;
     private String usuario;
     private String contrasena;
-    private ArrayList<Cancion> ListPlayList = new ArrayList();
+    private ArrayList<PlayList> ListPlayList = new ArrayList();
     private ArrayList<Cancion> ListFavoritos = new ArrayList();
 
     public Usuarios() {
@@ -62,12 +62,12 @@ public class Usuarios {
         this.contrasena = contrasena;
     }
 
-    public ArrayList<Cancion> getListPlayList() {
+    public ArrayList<PlayList> getListPlayList() {
         return ListPlayList;
     }
 
-    public void setListPlayList(ArrayList<Cancion> ListPlayList) {
-        this.ListPlayList = ListPlayList;
+    public void setListPlayList(PlayList e) {
+        ListPlayList.add(e);
     }
 
     public ArrayList<Cancion> getListFavoritos() {

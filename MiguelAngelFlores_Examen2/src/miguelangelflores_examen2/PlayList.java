@@ -5,23 +5,22 @@
  */
 package miguelangelflores_examen2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Miguel Flores
  */
-public class Cancion {
+public class PlayList {
 
     private String nombre;
-    private String artista;
-    private double duracion;
+    private ArrayList<Cancion> ListCanciones = new ArrayList();
 
-    public Cancion() {
+    public PlayList() {
     }
 
-    public Cancion(String nombre, String artista, double duracion) {
+    public PlayList(String nombre) {
         this.nombre = nombre;
-        this.artista = artista;
-        this.duracion = duracion;
     }
 
     public String getNombre() {
@@ -32,20 +31,12 @@ public class Cancion {
         this.nombre = nombre;
     }
 
-    public String getArtista() {
-        return artista;
+    public ArrayList<Cancion> getListCanciones() {
+        return ListCanciones;
     }
 
-    public void setArtista(String artista) {
-        this.artista = artista;
-    }
-
-    public double getDuracion() {
-        return duracion;
-    }
-
-    public void setDuracion(double duracion) {
-        this.duracion = duracion;
+    public void setListCanciones(ArrayList<Cancion> ListCanciones) {
+        this.ListCanciones = ListCanciones;
     }
 
     @Override
