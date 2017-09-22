@@ -9,13 +9,6 @@ package miguelangelflores_examen2;
  *
  * @author Miguel Flores
  */
-public class MiguelAngelFlores_Examen2 {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
+public class Cancion {
     
 }
