@@ -35,8 +35,8 @@ public class PlayList {
         return ListCanciones;
     }
 
-    public void setListCanciones(ArrayList<Cancion> ListCanciones) {
-        this.ListCanciones = ListCanciones;
+    public void setListCanciones(Cancion e) {
+        ListCanciones.add(e);
     }
 
     @Override

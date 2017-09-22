@@ -74,8 +74,8 @@ public class Usuarios {
         return ListFavoritos;
     }
 
-    public void setListFavoritos(ArrayList<Cancion> ListFavoritos) {
-        this.ListFavoritos = ListFavoritos;
+    public void setListFavoritos(Cancion e) {
+        ListFavoritos.add(e);
     }
 
     @Override
