@@ -1475,7 +1475,6 @@ public class Principal extends javax.swing.JFrame {
         AdministrarCosas m = new AdministrarCosas();
         AdministrarCosas a = new AdministrarCosas();
         m = a.cargarArchivo();
-
         ListAlbum = m.getListAlbum();
         ListCancion = m.getListCancion();
         ListUsuarios = m.getListUsuarios();
