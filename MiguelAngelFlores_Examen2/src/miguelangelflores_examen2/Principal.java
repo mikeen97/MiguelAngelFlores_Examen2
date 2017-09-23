@@ -676,7 +676,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 782, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2)
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -735,7 +735,7 @@ public class Principal extends javax.swing.JFrame {
         explorador.getContentPane().setLayout(exploradorLayout);
         exploradorLayout.setHorizontalGroup(
             exploradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE)
+            .addComponent(jTabbedPane8)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, exploradorLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1237,11 +1237,6 @@ public class Principal extends javax.swing.JFrame {
             }
         }
 
-        this.setVisible(false);
-        explorador.pack();
-        explorador.setLocationRelativeTo(this);
-        explorador.setVisible(true);
-
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -1315,9 +1310,131 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        explorador.setVisible(false);
+        this.pack();
+        this.setLocationRelativeTo(this);
+        this.setVisible(true);
+
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        Cancion m = ((Cancion) cb_reproduccion.getSelectedItem());
+        new HiloCancion(lb_tiempoo, m).start();
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+
+        AdministrarCosas m;
+        AdministrarCosas a = new AdministrarCosas();
+        m = a.cargarArchivo();
+        ListAlbum = m.getListAlbum();
+        ListCancion = m.getListCancion();
+        ListUsuarios = m.getListUsuarios();
+
+
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        AdministrarCosas a = new AdministrarCosas(ListUsuarios, ListAlbum, ListCancion);
+        a.escribirArchivo();
+    }//GEN-LAST:event_jButton21ActionPerformed
+
     private void jTabbedPane8StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane8StateChanged
 
     }//GEN-LAST:event_jTabbedPane8StateChanged
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        ListUsuarios.get(UserGlobal).setListPlayList(new PlayList(tf_crearPlayList.getText()));
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
+
+    }//GEN-LAST:event_jTabbedPane2StateChanged
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for (Cancion t1 : ListUsuarios.get(UserGlobal).getListFavoritos()) {
+            model.addElement(t1);
+        }
+        cb_reproduccion.setModel(model);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        cancion.pack();
+        cancion.setLocationRelativeTo(this);
+        cancion.setVisible(true);
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
+        int posAlbum = Integer.parseInt(tf_AgregarFavPosAlbum.getText());
+        int posCancion = Integer.parseInt(tf_AgregarFavPosCancion.getText());
+        Cancion e = ListUsuarios.get(UserGlobal).getListPlayList().get(posAlbum).getListCanciones().get(posCancion);
+        ListUsuarios.get(UserGlobal).setListFavoritos(e);
+    }//GEN-LAST:event_jButton16ActionPerformed
+
+    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
+        DefaultTreeModel modelo = (DefaultTreeModel) jt_agregarFavorito.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
+        raiz.removeAllChildren();
+        for (PlayList t1 : ListUsuarios.get(UserGlobal).getListPlayList()) {
+            int cont = 0;
+            int cont2 = 0;
+            int prueba = -1;
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                if (raiz.getChildAt(i).toString().equals(t1.getNombre())) {
+                    for (Cancion t2 : t1.getListCanciones()) {
+                        DefaultMutableTreeNode p = new DefaultMutableTreeNode(((Cancion) t2).getNombre());
+                        ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                        prueba = 1;
+                        cont2++;
+                    }
+                    cont2 = 0;
+                }
+            }
+            if (prueba == -1) {
+                DefaultMutableTreeNode nueva_raiz = new DefaultMutableTreeNode(t1.getNombre());
+                for (Cancion t2 : t1.getListCanciones()) {
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(((Cancion) t2).getNombre());
+                    nueva_raiz.add(p);
+                    raiz.add(nueva_raiz);
+                }
+            }
+            cont++;
+            modelo.reload();
+        }             // TODO add your handling code here:
+    }//GEN-LAST:event_jButton15ActionPerformed
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+        int cont2 = 0;
+        DefaultTreeModel modelo = (DefaultTreeModel) jt_playlist11.getModel();
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
+        raiz.removeAllChildren();
+        for (PlayList t1 : ListUsuarios.get(UserGlobal).getListPlayList()) {
+            int prueba = -1;
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                if (raiz.getChildAt(i).toString().equals(t1.getNombre())) {
+                    for (Cancion t2 : t1.getListCanciones()) {
+                        DefaultMutableTreeNode p = new DefaultMutableTreeNode(((Cancion) t2).getNombre());
+                        ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
+                        prueba = 1;
+                    }
+
+                }
+            }
+            if (prueba == -1) {
+                DefaultMutableTreeNode nueva_raiz = new DefaultMutableTreeNode(t1.getNombre());
+                for (Cancion t2 : t1.getListCanciones()) {
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(((Cancion) t2).getNombre());
+                    nueva_raiz.add(p);
+                    raiz.add(nueva_raiz);
+                }
+
+            }
+
+            modelo.reload();
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jTabbedPane9StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane9StateChanged
 
@@ -1356,19 +1473,6 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jTabbedPane9StateChanged
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        explorador.setVisible(false);
-        this.pack();
-        this.setLocationRelativeTo(this);
-        this.setVisible(true);
-
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        ListUsuarios.get(UserGlobal).setListPlayList(new PlayList(tf_crearPlayList.getText()));
-
-    }//GEN-LAST:event_jButton12ActionPerformed
-
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         int posPlayList = cb_playListAgregar.getSelectedIndex();
         int posAlbum = Integer.parseInt(tf_explorarIndexAlbum.getText());
@@ -1376,116 +1480,6 @@ public class Principal extends javax.swing.JFrame {
         Cancion e = ListAlbum.get(posAlbum).getListCanciones().get(posCancion);
         ListUsuarios.get(UserGlobal).getListPlayList().get(posPlayList).setListCanciones(e);
     }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        int cont2 = 0;
-        DefaultTreeModel modelo = (DefaultTreeModel) jt_playlist11.getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
-        raiz.removeAllChildren();
-        for (PlayList t1 : ListUsuarios.get(UserGlobal).getListPlayList()) {
-            int prueba = -1;
-            for (int i = 0; i < raiz.getChildCount(); i++) {
-                if (raiz.getChildAt(i).toString().equals(t1.getNombre())) {
-                    for (Cancion t2 : t1.getListCanciones()) {
-                        DefaultMutableTreeNode p = new DefaultMutableTreeNode(((Cancion) t2).getNombre());
-                        ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
-                        prueba = 1;
-                    }
-
-                }
-            }
-            if (prueba == -1) {
-                DefaultMutableTreeNode nueva_raiz = new DefaultMutableTreeNode(t1.getNombre());
-                for (Cancion t2 : t1.getListCanciones()) {
-                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(((Cancion) t2).getNombre());
-                    nueva_raiz.add(p);
-                    raiz.add(nueva_raiz);
-                }
-
-            }
-
-            modelo.reload();
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        DefaultTreeModel modelo = (DefaultTreeModel) jt_agregarFavorito.getModel();
-        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modelo.getRoot();
-        raiz.removeAllChildren();
-        for (PlayList t1 : ListUsuarios.get(UserGlobal).getListPlayList()) {
-            int cont = 0;
-            int cont2 = 0;
-            int prueba = -1;
-            for (int i = 0; i < raiz.getChildCount(); i++) {
-                if (raiz.getChildAt(i).toString().equals(t1.getNombre())) {
-                    for (Cancion t2 : t1.getListCanciones()) {
-                        DefaultMutableTreeNode p = new DefaultMutableTreeNode(((Cancion) t2).getNombre());
-                        ((DefaultMutableTreeNode) raiz.getChildAt(i)).add(p);
-                        prueba = 1;
-                        cont2++;
-                    }
-                    cont2 = 0;
-                }
-            }
-            if (prueba == -1) {
-                DefaultMutableTreeNode nueva_raiz = new DefaultMutableTreeNode(t1.getNombre());
-                for (Cancion t2 : t1.getListCanciones()) {
-                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(((Cancion) t2).getNombre());
-                    nueva_raiz.add(p);
-                    raiz.add(nueva_raiz);
-                }
-            }
-            cont++;
-            modelo.reload();
-        }             // TODO add your handling code here:
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        int posAlbum = Integer.parseInt(tf_AgregarFavPosAlbum.getText());
-        int posCancion = Integer.parseInt(tf_AgregarFavPosCancion.getText());
-        Cancion e = ListUsuarios.get(UserGlobal).getListPlayList().get(posAlbum).getListCanciones().get(posCancion);
-        ListUsuarios.get(UserGlobal).setListFavoritos(e);
-    }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void jTabbedPane2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane2StateChanged
-
-    }//GEN-LAST:event_jTabbedPane2StateChanged
-
-    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        cancion.pack();
-        cancion.setLocationRelativeTo(this);
-        cancion.setVisible(true);
-    }//GEN-LAST:event_jButton17ActionPerformed
-
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for (Cancion t1 : ListUsuarios.get(UserGlobal).getListFavoritos()) {
-            model.addElement(t1);
-        }
-        cb_reproduccion.setModel(model);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton18ActionPerformed
-
-    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        Cancion m = ((Cancion) cb_reproduccion.getSelectedItem());
-        new HiloCancion(lb_tiempoo, m).start();
-    }//GEN-LAST:event_jButton19ActionPerformed
-
-    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-
-        AdministrarCosas m;
-        AdministrarCosas a = new AdministrarCosas();
-        m = a.cargarArchivo();
-        ListAlbum = m.getListAlbum();
-        ListCancion = m.getListCancion();
-        ListUsuarios = m.getListUsuarios();
-
-
-    }//GEN-LAST:event_jButton20ActionPerformed
-
-    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        AdministrarCosas a = new AdministrarCosas(ListUsuarios, ListAlbum, ListCancion);
-        a.escribirArchivo();
-    }//GEN-LAST:event_jButton21ActionPerformed
 
     /**
      * @param args the command line arguments
