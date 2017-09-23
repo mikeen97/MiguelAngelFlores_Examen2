@@ -5,16 +5,18 @@
  */
 package miguelangelflores_examen2;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Miguel Flores
  */
-public class Cancion {
+public class Cancion implements Serializable{
 
     private String nombre;
     private String artista;
     private double duracion;
-
+    
     public Cancion() {
     }
 

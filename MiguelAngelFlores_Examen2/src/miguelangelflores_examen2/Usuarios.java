@@ -5,13 +5,14 @@
  */
 package miguelangelflores_examen2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Miguel Flores
  */
-public class Usuarios {
+public class Usuarios implements Serializable{
 
     private String nombre;
     private int edad;

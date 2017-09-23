@@ -5,13 +5,14 @@
  */
 package miguelangelflores_examen2;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Miguel Flores
  */
-public class Album {
+public class Album implements Serializable{
 
     private String nombre;
     private String artista;
