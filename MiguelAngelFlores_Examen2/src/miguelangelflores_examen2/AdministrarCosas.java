@@ -19,16 +19,18 @@ import java.util.ArrayList;
  *
  * @author Miguel Flores
  */
-public class AdministrarCosas implements Serializable{
+public class AdministrarCosas implements Serializable {
 
-   
     private ArrayList<Usuarios> ListUsuarios = new ArrayList();
     private ArrayList<Album> ListAlbum = new ArrayList();
     private ArrayList<Cancion> ListCancion = new ArrayList();
-    private File archivo= new File("./Usuarios.txt");
+    private File archivo = new File("./Usuarios.txt");
 
-    public AdministrarCosas(ArrayList Usuario, ArrayList Album,ArrayList Cancion) {
+    public AdministrarCosas(ArrayList Usuario, ArrayList Album, ArrayList Cancion) {
         this.archivo = new File("./Usuarios.txt");
+        ListAlbum = Album;
+        ListUsuarios = Usuario;
+        ListCancion = Cancion;
     }
 
     public AdministrarCosas() {
@@ -65,17 +67,15 @@ public class AdministrarCosas implements Serializable{
     public void setArchivo(File archivo) {
         this.archivo = archivo;
     }
-    
 
- 
-    public AdministrarCosas cargarArchivo(){
+    public AdministrarCosas cargarArchivo() {
         FileInputStream a = null;
         ObjectInputStream r = null;
         AdministrarCosas admin = null;
         try {
             a = new FileInputStream(archivo);
             r = new ObjectInputStream(a);
-            admin = (AdministrarCosas)r.readObject();
+            admin = (AdministrarCosas) r.readObject();
         } catch (Exception e) {
         }
         try {
@@ -85,7 +85,7 @@ public class AdministrarCosas implements Serializable{
         }
         return admin;
     }
-    
+
     public void escribirArchivo() {
         AdministrarCosas a = new AdministrarCosas();
         a.setListAlbum(this.ListAlbum);

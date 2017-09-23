@@ -1472,7 +1472,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
 
-        AdministrarCosas m = new AdministrarCosas();
+        AdministrarCosas m;
         AdministrarCosas a = new AdministrarCosas();
         m = a.cargarArchivo();
         ListAlbum = m.getListAlbum();
